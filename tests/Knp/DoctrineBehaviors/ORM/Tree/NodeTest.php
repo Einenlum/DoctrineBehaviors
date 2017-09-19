@@ -50,7 +50,7 @@ class NodeTest extends \PHPUnit_Framework_TestCase
     private function buildTree()
     {
         $item = $this->buildNode();
-        $item->setMaterializedPath('');
+        $item->setMaterializedPath('/');
         $item->setId(1);
 
         $childItem = $this->buildNode();
@@ -78,7 +78,7 @@ class NodeTest extends \PHPUnit_Framework_TestCase
 
     public function testBuildTree()
     {
-        $root = $this->buildNode(array('setMaterializedPath' => ''     , 'setName' => 'root'        , 'setId' => 1));
+        $root = $this->buildNode(array('setMaterializedPath' => '/'    , 'setName' => 'root'        , 'setId' => 1));
         $flatTree = array(
             $this->buildNode(array('setMaterializedPath' => '/1'       , 'setName' => 'Villes'      , 'setId' => 2)),
             $this->buildNode(array('setMaterializedPath' => '/1/2'     , 'setName' => 'Nantes'      , 'setId' => 3)),
@@ -128,7 +128,7 @@ class NodeTest extends \PHPUnit_Framework_TestCase
         return array(
             array($this->buildNode(array('setMaterializedPath' => '/0/1'))            , '/0'),
             array($this->buildNode(array('setMaterializedPath' => '/'))               , '/'),
-            array($this->buildNode(array('setMaterializedPath' => ''))                , '/'),
+            array($this->buildNode(array('setMaterializedPath' => '/'))               , '/'),
             array($this->buildNode(array('setMaterializedPath' => '/test'))           , '/test'),
             array($this->buildNode(array('setMaterializedPath' => '/0/1/2/3/4/5/6/')) , '/0'),
         );
@@ -314,4 +314,3 @@ class NodeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($root[0][0], $entity[0][0]);
     }
 }
-

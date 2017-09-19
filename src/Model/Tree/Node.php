@@ -31,7 +31,7 @@ trait Node
      */
     private $parentNode;
 
-    protected $materializedPath = '';
+    protected $materializedPath = '/';
 
     public function getNodeId()
     {
@@ -53,7 +53,7 @@ trait Node
      **/
     public function getRealMaterializedPath()
     {
-        return $this->getMaterializedPath() . self::getMaterializedPathSeparator() . $this->getNodeId();
+        return rtrim($this->getMaterializedPath(), self::getMaterializedPathSeparator()) . self::getMaterializedPathSeparator() . $this->getNodeId();
     }
 
     public function getMaterializedPath()
@@ -66,6 +66,11 @@ trait Node
      **/
     public function setMaterializedPath($path)
     {
+        if (1 !== strpos($path, self::getMaterializedPathSeparator())) {
+            throw new \RuntimeException(
+                'The materialized path should start with '.self::getMaterializedPathSeparator()
+            );
+        }
         $this->materializedPath = $path;
         $this->setParentMaterializedPath($this->getParentMaterializedPath());
 

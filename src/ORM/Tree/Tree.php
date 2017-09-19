@@ -18,7 +18,7 @@ trait Tree
     {
         return $this->createQueryBuilder($rootAlias)
             ->andWhere($rootAlias.'.materializedPath = :empty')
-            ->setParameter('empty', '')
+            ->setParameter('empty', '/')
         ;
     }
 
@@ -50,7 +50,7 @@ trait Tree
      *
      * @return NodeInterface a node
      */
-    public function getTree($path = '', $rootAlias = 't')
+    public function getTree($path = '/', $rootAlias = 't')
     {
         $results = $this->getFlatTree($path, $rootAlias);
 
@@ -94,7 +94,7 @@ trait Tree
      *
      * @return QueryBuilder
      */
-    public function getFlatTreeQB($path = '', $rootAlias = 't')
+    public function getFlatTreeQB($path = '/', $rootAlias = 't')
     {
         $qb = $this->createQueryBuilder($rootAlias)
             ->andWhere($rootAlias.'.materializedPath LIKE :path')
